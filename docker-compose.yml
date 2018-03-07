@@ -3,9 +3,9 @@ services:
     www:
         build: .
         ports: 
-            - "8001:80"
+            - "80:80"
         volumes:
-            - ./www:/var/www/html/
+            - ./src/app:/var/www/html/
         links:
             - db
         networks:
@@ -20,7 +20,7 @@ services:
             MYSQL_PASSWORD: test
             MYSQL_ROOT_PASSWORD: test 
         volumes:
-            - ./dump:/docker-entrypoint-initdb.d
+            - ./src/db:/docker-entrypoint-initdb.d
             - persistent:/var/lib/mysql
         networks:
             - default
