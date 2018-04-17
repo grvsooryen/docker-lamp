@@ -1,7 +1,9 @@
 version: "2"
 services:
     www:
-        build: .
+        build:
+            context: .
+            dockerfile: Dockerfile
         ports: 
             - "80:80"
         volumes:
@@ -11,7 +13,9 @@ services:
         networks:
             - default
     db:
-        image: mysql
+        build:
+            context: .
+            dockerfile: Dockerfile-mysql
         ports: 
             - "3306:3306"
         environment:
@@ -29,7 +33,7 @@ services:
         links: 
             - db:db
         ports:
-            - 8000:80
+            - 8084:80
         environment:
             MYSQL_USER: user
             MYSQL_PASSWORD: test
